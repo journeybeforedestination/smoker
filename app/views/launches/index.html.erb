@@ -1,0 +1,19 @@
+<% @launches.each do |launch| %>
+  <div class="w-full container rounded overflow-hidden shadow-lg">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2"><%= launch.launch %></div>
+      <p class="text-gray-700 text-base">
+        <%= launch.iss %>
+      </p>
+      <p class="text-gray-700 text-base">
+        <%= launch.authorization_endpoint %>
+      </p>
+      <p class="text-gray-700 text-base">
+        <%= launch.token_endpoint %>
+      </p>
+      <p class="text-gray-700 text-base">
+        <%= launch.state %>
+      </p>
+    </div>
+  </div>
+<% end %>

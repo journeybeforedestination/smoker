@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  launch: one
+  access_token: MyText
+  experation: 2024-10-15 16:22:13
+  scope: MyString
+  id_token: MyText
+  refresh_token: MyText
+
+two:
+  launch: two
+  access_token: MyText
+  experation: 2024-10-15 16:22:13
+  scope: MyString
+  id_token: MyText
+  refresh_token: MyText
