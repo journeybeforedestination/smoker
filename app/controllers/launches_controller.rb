@@ -30,32 +30,14 @@ class LaunchesController < ApplicationController
                          launch: launch,
                          authorization_endpoint: authorization_endpoint,
                          token_endpoint: token_endpoint,
-                         state: state)
+                         state: state,
+                         pkce: pkce)
+
     # ex target: https://launch.smarthealthit.org/v/r4/auth/authorize?response_type=code&client_id=whatever&scope=patient%2F*.*%20user%2F*.*%20launch%20launch%2Fpatient%20launch%2Fencounter%20openid%20fhirUser%20profile%20offline_access&redirect_uri=https%3A%2F%2Flaunch.smarthealthit.org%2Fsample-app&aud=https%3A%2F%2Flaunch.smarthealthit.org%2Fv%2Fr4%2Ffhir&state=kuPNPLBtO2TqvSOF&launch=WzAsIiIsIiIsIkFVVE8iLDAsMCwwLCIiLCIiLCIiLCIiLCIiLCIiLCIiLDAsMSwiIl0&code_challenge=SWTzkX6Kdd58nGK6zIq0iHH7YAr8QGbwmFBUhRk6EIk&code_challenge_method=S256
     # todo handle failure saving
     if @launch.save
-      redirect_url = URI.join("http://" + request.host_with_port, launches_path)
-      parsed = URI.parse(authorization_endpoint)
-      query = if parsed.query
-              CGI.parse(parsed.query)
-      else
-              {}
-      end
-
-      query["response_type"] = "code"
-      query["client_id"] = "whatever"
-      query["launch"] = launch
-      query["scope"] = "launch/patient"
-      query["redirect_uri"] = redirect_url
-      query["aud"] = iss
-      query["state"] = state
-      query["code_challenge"] = pkce
-      query["code_challenge_method"] = "S256"
-
-      parsed.query = URI.encode_www_form(query)
-      target = parsed.to_s
-
-      puts target
+      app_url = URI.join("http://" + request.host_with_port, launches_path)
+      target = @launch.CalcAuthRedirect(app_url)
       redirect_to target, allow_other_host: true
     end
   end
