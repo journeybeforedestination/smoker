@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2024_10_22_232415) do
+ActiveRecord::Schema[8.1].define(version: 2024_11_02_222655) do
   create_table "launch_tokens", force: :cascade do |t|
     t.integer "launch_id", null: false
     t.text "access_token", null: false
@@ -32,6 +32,7 @@ ActiveRecord::Schema[8.1].define(version: 2024_10_22_232415) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "pkce"
+    t.string "app_url"
   end
 
   add_foreign_key "launch_tokens", "launches"

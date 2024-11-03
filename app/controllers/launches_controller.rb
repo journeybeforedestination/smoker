@@ -5,6 +5,7 @@ class LaunchesController < ApplicationController
 
   def show
     @launch = Launch.find(params[:id])
+    @token = @launch.TradeCodeForToken(params[:code])
   end
 
   def initiate
@@ -24,13 +25,14 @@ class LaunchesController < ApplicationController
     launch_data[:token_endpoint] = smart_config.body["token_endpoint"]
 
     launch_data[:state] = SecureRandom.uuid.delete("-")
-    launch_data[:pkce] = Digest::SHA256.hexdigest "ourcode"
+    launch_data[:pkce] = "ourcode"
 
     @launch = Launch.new(launch_data)
 
     # todo handle failure saving
     if @launch.save
       app_url = URI.join("http://" + request.host_with_port, launch_path(@launch))
+      @launch.update(app_url: app_url)
       target = @launch.CalcAuthRedirect(app_url)
       redirect_to target, allow_other_host: true
     end

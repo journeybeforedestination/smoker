@@ -25,10 +25,32 @@ class Launch < ApplicationRecord
       query["redirect_uri"] = app_url
       query["aud"] = iss
       query["state"] = state
-      query["code_challenge"] = pkce
+      query["code_challenge"] = Digest::SHA256.base64digest(pkce).delete("=")
       query["code_challenge_method"] = "S256"
 
       url.query = URI.encode_www_form(query)
       url.to_s
+  end
+
+  # todo, we should maybe create a token in the DB here? Maybe that should be the job of the controller?
+  def TradeCodeForToken(code)
+    data = {
+      grant_type: "authorization_code",
+      code: code,
+      redirect_uri: app_url,
+      code_verifier: pkce,
+      client_id: "whatever"
+    }
+
+    response = Faraday.post(token_endpoint) do |req|
+      req.headers["Content-Type"] = "application/x-www-form-urlencoded"
+      req.body = URI.encode_www_form(data)
+    end
+
+    if response.success?
+      JSON.parse(response.body)["access_token"]
+    else
+      "Error: #{response.status}"
+    end
   end
 end
