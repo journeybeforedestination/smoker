@@ -1,4 +1,6 @@
 class LaunchesController < ApplicationController
+  TRUSTED_URLS = [ "https://launch.smarthealthit.org/v/r4/auth/authorization_endpoint" ]
+
   def index
     @launches = Launch.all
   end
@@ -34,7 +36,10 @@ class LaunchesController < ApplicationController
       app_url = URI.join("http://" + request.host_with_port, launch_path(@launch))
       @launch.update(app_url: app_url)
       target = @launch.CalcAuthRedirect(app_url)
-      redirect_to target, allow_other_host: true
+      if TRUSTED_URLS.include?(target)
+        redirect_to target
+      end
+      puts "Error"
     end
   end
 
