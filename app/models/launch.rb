@@ -5,7 +5,7 @@ class Launch < ApplicationRecord
   validates :authorization_endpoint, presence: true
   validates :state, presence: true
 
-  has_one :launch_token
+  has_one :launch_token, dependent: :destroy
 
   # CalcAuthRedirect will build an approriate redirect URL for this launch.
   # The redirect will include the app_url as a query param along with the
@@ -48,7 +48,7 @@ class Launch < ApplicationRecord
     end
 
     if response.success?
-      JSON.parse(response.body)["access_token"]
+      JSON.parse(response.body)
     else
       "Error: #{response.status}"
     end
