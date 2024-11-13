@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 2cc0a796f581d4d2d5f2bd9f93569f744a0d2785
+  revision: 5992f9efde7dcece803594b0e0063cf64b73d40d
   branch: main
   specs:
     actioncable (8.1.0.alpha)
@@ -107,7 +107,7 @@ GEM
     bcrypt_pbkdf (1.1.1)
     bcrypt_pbkdf (1.1.1-arm64-darwin)
     bcrypt_pbkdf (1.1.1-x86_64-darwin)
-    benchmark (0.3.0)
+    benchmark (0.4.0)
     bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.4)
@@ -190,7 +190,7 @@ GEM
     msgpack (1.7.3)
     net-http (0.4.1)
       uri
-    net-imap (0.5.0)
+    net-imap (0.5.1)
       date
       net-protocol
     net-pop (0.1.2)
@@ -253,7 +253,7 @@ GEM
     rdoc (6.7.0)
       psych (>= 4.0.0)
     regexp_parser (2.9.2)
-    reline (0.5.10)
+    reline (0.5.11)
       io-console (~> 0.5)
     rexml (3.3.9)
     rubocop (1.67.0)
@@ -286,7 +286,7 @@ GEM
       rubocop-rails
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
-    securerandom (0.3.1)
+    securerandom (0.3.2)
     selenium-webdriver (4.26.0)
       base64 (~> 0.2)
       logger (~> 1.4)
@@ -350,7 +350,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
-    uri (1.0.0)
+    uri (1.0.1)
     useragent (0.16.10)
     web-console (4.2.1)
       actionview (>= 6.0.0)
