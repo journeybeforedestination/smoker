@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 2cc0a796f581d4d2d5f2bd9f93569f744a0d2785
+  revision: 5992f9efde7dcece803594b0e0063cf64b73d40d
   branch: main
   specs:
     actioncable (8.1.0.alpha)
@@ -190,7 +190,7 @@ GEM
     msgpack (1.7.3)
     net-http (0.4.1)
       uri
-    net-imap (0.5.0)
+    net-imap (0.5.1)
       date
       net-protocol
     net-pop (0.1.2)
@@ -286,7 +286,7 @@ GEM
       rubocop-rails
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
-    securerandom (0.3.1)
+    securerandom (0.3.2)
     selenium-webdriver (4.26.0)
       base64 (~> 0.2)
       logger (~> 1.4)
