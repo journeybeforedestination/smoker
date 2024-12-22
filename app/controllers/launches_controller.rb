@@ -1,4 +1,6 @@
 class LaunchesController < ApplicationController
+  require "fhir_server"
+
   def index
     @launches = Launch.all
   end
@@ -19,19 +21,10 @@ class LaunchesController < ApplicationController
   def initiate
     launch_data = launch_params
 
-    # this will break on windows... do we really need a gem for this???
-    conn = Faraday.new(url: File.join(launch_data[:iss], ".well-known/smart-configuration")) do |builder|
-      builder.request :json
-      builder.response :json
-      builder.response :raise_error
-      builder.response :logger
-    end
+    smart_config = FhirServer.new(launch_data[:iss]).fetch_config
 
-    # todo handle errors from remote server
-    smart_config = conn.get
     launch_data[:authorization_endpoint] = smart_config.body["authorization_endpoint"]
     launch_data[:token_endpoint] = smart_config.body["token_endpoint"]
-
     launch_data[:state] = SecureRandom.uuid.delete("-")
     launch_data[:pkce] = "ourcode"
 
