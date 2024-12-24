@@ -10,7 +10,7 @@ class Launch < ApplicationRecord
   # CalcAuthRedirect will build an approriate redirect URL for this launch.
   # The redirect will include the app_url as a query param along with the
   # other launch fields defined by SMART on FHIR
-  def CalcAuthRedirect(app_url)
+  def CalcAuthRedirect
       url = URI.parse(authorization_endpoint)
       query = if url.query
               CGI.parse(url.query)

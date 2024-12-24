@@ -32,9 +32,9 @@ class LaunchesController < ApplicationController
 
     # todo handle failure saving
     if @launch.save
-      app_url = URI.join("http://" + request.host_with_port, launch_path(@launch))
-      @launch.update(app_url: app_url)
-      target = @launch.CalcAuthRedirect(app_url)
+      @launch.app_url = URI.join("http://" + request.host_with_port, launch_path(@launch))
+      @launch.save
+      target = @launch.CalcAuthRedirect
       redirect_to target, allow_other_host: true
     end
   end
