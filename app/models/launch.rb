@@ -29,7 +29,7 @@ class Launch < ApplicationRecord
       query["code_challenge_method"] = "S256"
 
       url.query = URI.encode_www_form(query)
-      url.to_s
+      url
   end
 
   # todo, we should maybe create a token in the DB here? Maybe that should be the job of the controller?

@@ -1,8 +1,6 @@
 class LaunchesController < ApplicationController
   require "fhir_server"
 
-  REDIRECT_URI = ENV["FHIR_REDIRECT_URI"]
-
   def index
     @launches = Launch.all
   end
@@ -37,7 +35,7 @@ class LaunchesController < ApplicationController
       @launch.app_url = URI.join("http://" + request.host_with_port, launch_path(@launch))
       @launch.save
       target = @launch.CalcAuthRedirect
-      redirect_to target, allow_other_host: true if target.start_with?(REDIRECT_URI)
+      redirect_to target, allow_other_host: true
     end
   end
 
