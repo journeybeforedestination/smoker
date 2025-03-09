@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+gem "dotenv", groups: [ :development, :test ]
+
 # Use main development branch of Rails
 gem "rails", github: "rails/rails", branch: "main"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
@@ -67,3 +69,5 @@ group :test do
 end
 
 gem "tailwindcss-ruby", "~> 4.0"
+
+gem "oauth2", "~> 2.0"
